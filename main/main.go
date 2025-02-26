@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
 	"github.com/codevibe-de/goadv--products/product/pb"
@@ -28,6 +29,14 @@ func (s *server) ListProducts(in *pb.ProductListRequest, stream pb.ProductServic
 		}
 	}
 	return nil
+}
+
+func (s *server) GetProduct(ctx context.Context, in *pb.ProductRequest) (*pb.ProductResponse, error) {
+	return &pb.ProductResponse{
+		ProductId: in.ProductId,
+		Name:      "Pizza",
+		Price:     7.99,
+	}, nil
 }
 
 func main() {
