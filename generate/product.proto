@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package product;
+
+option go_package = "product/pb";
+
+service ProductService {
+  // Get a single product by ID
+  rpc GetProduct(ProductRequest) returns (ProductResponse);
+
+  // Stream all available products (continuous data stream)
+  rpc ListProducts(ProductListRequest) returns (stream ProductResponse);
+
+  rpc CreateProduct(ProductCreateRequest) returns (ProductResponse);
+}
+
+// Request a product by its unique ID
+message ProductRequest {
+  string product_id = 1;
+}
+
+//
+message ProductCreateRequest {
+  string product_id = 1;
+  string name = 2;
+  double price = 4;
+}
+
+// Request multiple products by their IDs
+message ProductListRequest {
+  repeated string product_ids = 1;
+}
+
+// Response containing product details
+message ProductResponse {
+  string product_id = 1;
+  string name = 2;
+  double price = 4;
+  ProductCategory category = 5;
+}
+
+enum ProductCategory {
+  PRODUCT_CATEGORY_UNSPECIFIED = 0;
+  PRODUCT_CATEGORY_PIZZA = 1;
+  PRODUCT_CATEGORY_PASTA = 2;
+  PRODUCT_CATEGORY_SALAD = 3;
+  PRODUCT_CATEGORY_DESSERT = 4;
+}
