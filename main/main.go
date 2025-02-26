@@ -4,7 +4,7 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"github.com/codevibe-de/goadv--products/product/pb"
+	"github.com/codevibe-de/goadv--products/generate/product/pb"
 	"google.golang.org/grpc"
 	"log"
 	"net"
@@ -36,6 +36,14 @@ func (s *server) GetProduct(ctx context.Context, in *pb.ProductRequest) (*pb.Pro
 		ProductId: in.ProductId,
 		Name:      "Pizza",
 		Price:     7.99,
+	}, nil
+}
+
+func (s *server) CreateProduct(ctx context.Context, in *pb.ProductCreateRequest) (*pb.ProductResponse, error) {
+	return &pb.ProductResponse{
+		ProductId: in.ProductId,
+		Name:      in.Name,
+		Price:     in.Price,
 	}, nil
 }
 

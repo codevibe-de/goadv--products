@@ -11,12 +11,19 @@ service ProductService {
   // Stream all available products (continuous data stream)
   rpc ListProducts(ProductListRequest) returns (stream ProductResponse);
 
-  rpc CreateProduct(ProductRequest) returns (ProductResponse);
+  rpc CreateProduct(ProductCreateRequest) returns (ProductResponse);
 }
 
 // Request a product by its unique ID
 message ProductRequest {
   string product_id = 1;
+}
+
+//
+message ProductCreateRequest {
+  string product_id = 1;
+  string name = 2;
+  double price = 4;
 }
 
 // Request multiple products by their IDs
