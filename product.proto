@@ -1,15 +1,17 @@
 syntax = "proto3";
 
-package pizza;
+package product;
 
-option go_package = "pizza/pb";
+option go_package = "product/pb";
 
-service PizzaService {
+service ProductService {
   // Get a single product by ID
   rpc GetProduct(ProductRequest) returns (ProductResponse);
 
   // Stream all available products (continuous data stream)
   rpc ListProducts(ProductListRequest) returns (stream ProductResponse);
+
+  rpc CreateProduct(ProductRequest) returns (ProductResponse);
 }
 
 // Request a product by its unique ID
